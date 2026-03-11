@@ -1,0 +1,46 @@
+/* En tu CSS o style tag */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.product-table th, .product-table td {
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+.product-table th {
+  background-color: #f2f2f2;
+}
+
+.product-table td:last-child {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center; /* Botones */
+}
+
+.product-tablet body {
+  max-height: 400px;
+  overflow-y: auto;
+  display: block;
+}
+
+.product-table tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.product-table thead, .product-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.product-table td button {
+  padding: 0.3rem 0.5rem;
+  margin-right: 0.3rem;
+  cursor: pointer;
+}

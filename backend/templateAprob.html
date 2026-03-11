@@ -1,0 +1,151 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                background: #f5f7fa;
+                font-family: Arial;
+            }
+
+            .page {
+                width: 210mm;
+                min-height: 297mm;
+                background: white;
+                padding: 20mm;
+                box-sizing: border-box;
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 30px;
+            }
+
+            .logo {
+                height: 50px;
+            }
+
+            .title {
+                text-align: center;
+                font-size: 30px;
+                font-weight: bold;
+                margin: 25px 0;
+            }
+
+            .info {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                margin-bottom: 30px;
+            }
+
+            .label {
+                font-weight: bold;
+                color: #444;
+            }
+
+            .value {
+                margin-top: 4px;
+                margin-bottom: 15px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th {
+                background: #e6eff6;
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            td {
+                padding: 12px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .summary {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 30px;
+            }
+
+            .box {
+                background: #d9edf7;
+                padding: 15px;
+                border-radius: 8px;
+            }
+
+            .total {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .note {
+                background: #eaf5fb;
+                padding: 15px;
+                border-radius: 8px;
+                margin-top: 20px;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="page">
+            <div class="header">
+                <img src="logo.png" class="logo" />
+            </div>
+
+            <div class="title">
+                Informe de Cotización
+            </div>
+
+            <div class="info">
+                <div>
+                    <div class="label">Cliente</div>
+                    <div class="value">{{cliente}}</div>
+
+                    <div class="label">Fecha de emisión</div>
+                    <div class="value">{{fechaEmision}}</div>
+                </div>
+
+                <div>
+                    <div class="label">Asesor Comercial</div>
+                    <div class="value">{{asesor}}</div>
+
+                    <div class="label">Fecha de caducidad</div>
+                    <div class="value">{{fechaCaducidad}}</div>
+                </div>
+            </div>
+
+            <h3>Detalle de Productos y Servicios</h3>
+
+            <table>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+
+                {{rows}}
+            </table>
+
+            <div class="summary">
+                <div class="box">
+                    Descuento aplicado: {{descuento}}%
+                </div>
+
+                <div class="box total">
+                    Monto previsto: ${{total}}
+                </div>
+            </div>
+
+            <div class="note">
+                Esta cotización tiene validez hasta la fecha indicada.
+            </div>
+        </div>
+    </body>
+</html>

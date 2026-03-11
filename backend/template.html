@@ -1,0 +1,159 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                background: #f5f7fa;
+                font-family: Arial, sans-serif;
+            }
+
+            .page {
+                width: 210mm;
+                min-height: 297mm;
+                background: white;
+                padding: 15mm 20mm; /* menos margen superior */
+                box-sizing: border-box;
+            }
+
+            .header {
+                display: flex;
+                flex-direction: column; /* hace que los elementos estén uno debajo del otro */
+                align-items: center;    /* centra horizontalmente todo el contenido */
+                margin-bottom: 20px;
+            }
+
+            .logo {
+                height: 35px; /* ajusta según tamaño real del logo */
+                flex-shrink: 0; /* no se achique */
+                margin-bottom: 10px; /* espacio entre logo y título */
+            }
+
+            .title {
+                font-size: 28px;
+                font-weight: bold;
+                text-align: center; /* ahora está a la derecha del logo */
+            }
+
+            .info {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                margin-bottom: 20px;
+            }
+
+            .label {
+                font-weight: bold;
+                color: #444;
+            }
+
+            .value {
+                margin-top: 4px;
+                margin-bottom: 10px;
+            }
+
+            h3 {
+                margin-bottom: 10px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: center; /* centra contenido horizontal */
+            }
+
+            th,
+            td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            th {
+                background: #e6eff6;
+            }
+
+            td {
+                border-bottom: 1px solid #ddd;
+            }
+
+            .summary {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+            }
+
+            .box {
+                background: #d9edf7;
+                padding: 12px;
+                border-radius: 6px;
+                font-size: 14px;
+            }
+
+            .total {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .note {
+                background: #eaf5fb;
+                padding: 12px;
+                border-radius: 6px;
+                margin-top: 15px;
+                font-size: 13px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="page">
+            <div class="header">
+                <img src="https://www.prosegur.com.ar/dam/jcr:bf968afd-9296-420f-8ab4-367e4d708538/logo-prosegur.svg" class="logo" />
+                <div class="title">
+                    Informe de Cotización
+                </div>
+            </div>
+
+            <div class="info">
+                <div>
+                    <div class="label">Cliente</div>
+                    <div class="value">{{cliente}}</div>
+
+                    <div class="label">Fecha de emisión</div>
+                    <div class="value">{{fechaEmision}}</div>
+                </div>
+
+                <div>
+                    <div class="label">Asesor Comercial</div>
+                    <div class="value">{{asesor}}</div>
+
+                    <div class="label">Fecha de caducidad</div>
+                    <div class="value">{{fechaCaducidad}}</div>
+                </div>
+            </div>
+
+            <h3>Detalle de Productos y Servicios</h3>
+
+            <table>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+                {{rows}}
+            </table>
+
+            <div class="summary">
+                <div class="box">
+                    Descuento aplicado: {{descuento}}%
+                </div>
+
+                <div class="box total">
+                    Monto previsto: ${{total}}
+                </div>
+            </div>
+
+            <div class="note">
+                Esta cotización tiene validez hasta la fecha indicada.
+            </div>
+        </div>
+    </body>
+</html>

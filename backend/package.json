@@ -1,0 +1,10 @@
+{
+    "name": "cotizador-backend",
+    "type": "module",
+    "dependencies": {
+        "cors": "^2.8.6",
+        "express": "^5.2.1",
+        "puppeteer": "^24.39.0",
+        "sqlite3": "^5.1.7"
+    }
+}
