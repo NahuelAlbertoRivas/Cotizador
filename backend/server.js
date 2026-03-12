@@ -87,15 +87,27 @@ app.get("/api/quotes", (req, res) => {
 
 app.post("/api/pdf", async (req, res) => {
     try {
+        console.log("PDF request recibida");
+        console.log("Payload:", JSON.stringify(req.body, null, 2));
+
         const pdf = await generatePDF(req.body);
+
         res.set({
-        "Content-Type": "application/pdf",
-        "Content-Disposition": "attachment; filename=cotizacion.pdf",
+            "Content-Type": "application/pdf",
+            "Content-Disposition": "attachment; filename=cotizacion.pdf",
         });
+
         res.send(pdf);
+
     } catch (err) {
-        console.error("Error generando PDF:", err);
-        res.status(500).json({ error: "Error generando PDF" });
+        console.error("ERROR GENERANDO PDF:");
+        console.error(err);
+
+        res.status(500).json({
+            error: "Error generando PDF",
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
