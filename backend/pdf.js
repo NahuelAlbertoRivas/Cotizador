@@ -49,16 +49,9 @@ export async function generatePDF(data) {
         const executablePath = await chromium.executablePath();
 
         const browser = await puppeteer.launch({
-            args: [
-                ...chromium.args,
-                "--no-sandbox",
-                "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-gpu",
-                "--single-process"
-            ],
-            executablePath,
-            headless: chromium.headless
+            executablePath: "/usr/bin/chromium-browser",
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+            headless: true,
         });
 
         const page = await browser.newPage();
