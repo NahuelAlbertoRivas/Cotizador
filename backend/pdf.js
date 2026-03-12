@@ -33,8 +33,8 @@ export async function generatePDF(data) {
         console.log("Chrome executable path:", puppeteer.executablePath());
 
         const browser = await puppeteer.launch({
-            executablePath: '/usr/bin/chromium-browser', // o /usr/bin/google-chrome
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+            args: ["--no-sandbox", "--disable-setuid-sandbox"], // necesarios en contenedores
+            headless: true
         });
 
         console.log("Chromium iniciado");
