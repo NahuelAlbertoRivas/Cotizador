@@ -43,10 +43,19 @@ export async function generatePDF(data) {
         console.log("Template cargado correctamente");
         console.log("Iniciando Puppeteer...");
 
+        const executablePath = await chromium.executablePath();
+
         const browser = await puppeteer.launch({
-            args: chromium.args,
-            executablePath: await chromium.executablePath(),
-            headless: chromium.headless,
+            args: [
+                ...chromium.args,
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+                "--single-process"
+            ],
+            executablePath,
+            headless: chromium.headless
         });
 
         const page = await browser.newPage();
