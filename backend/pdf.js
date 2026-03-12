@@ -28,7 +28,7 @@ export async function generatePDF(data) {
         console.log("Template cargado correctamente");
 
         const browser = await puppeteer.launch({
-            headless: "new",
+            headless: "true",
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox",
