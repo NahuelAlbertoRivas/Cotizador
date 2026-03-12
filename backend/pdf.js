@@ -32,8 +32,7 @@ export async function generatePDF(data) {
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-gpu"
+                "--disable-dev-shm-usage"
             ]
         });
 
