@@ -2,13 +2,9 @@
 
 set -o errexit
 
-#Install dependencies
-npm install-all
-
-#por si es necesario reconstruir
-npm run build
-
 cd backend
+
+npm install
 
 #asegurar que exista la dirección de cache para Puppeteer
 PUPPETEER_CACHE_DIR=/opt/render/.cache/puppeteer
@@ -26,5 +22,13 @@ else
     echo "...Storing Puppeteer Cache in Build Cache"
     cp -R $PUPPETEER_CACHE_DIR /opt/render/project/src/.cache/puppeteer/chrome/
 fi
+
+cd ..
+
+cd frontend
+
+npm install
+
+npm build
 
 cd ..
