@@ -45,13 +45,10 @@ export async function generatePDF(data) {
 
         const binPath = path.join("node_modules/@sparticuz/chromium-min/bin");
         console.log("Chromium bin path exists?", fs.existsSync(binPath));
-
-        const executablePath = await chromium.executablePath();
-
+        
         const browser = await puppeteer.launch({
-            executablePath: "/usr/bin/chromium-browser",
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
             headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"]
         });
 
         const page = await browser.newPage();
