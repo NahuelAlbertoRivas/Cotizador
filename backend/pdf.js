@@ -25,15 +25,16 @@ export async function generatePDF(data) {
             `src="data:image/png;base64,${logoData}"`
         );
 
+        console.log("Datos recibidos:", JSON.stringify(data, null, 2));
+
         console.log("Template cargado correctamente");
 
+        console.log("Iniciando Puppeteer...");
+        console.log("Chrome executable path:", puppeteer.executablePath());
+
         const browser = await puppeteer.launch({
-            headless: "true",
-            args: [
-                "--no-sandbox",
-                "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage"
-            ]
+            executablePath: '/usr/bin/chromium-browser', // o /usr/bin/google-chrome
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
         });
 
         console.log("Chromium iniciado");
@@ -47,9 +48,13 @@ export async function generatePDF(data) {
             printBackground: true,
         });
 
+        console.log("Contenido HTML cargado en la página.");
+
         await browser.close();
 
         console.log("PDF generado correctamente");
+
+        console.log("Navegador cerrado, PDF generado correctamente.");
 
         return pdf;
 
