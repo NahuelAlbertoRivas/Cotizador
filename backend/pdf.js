@@ -43,6 +43,9 @@ export async function generatePDF(data) {
         console.log("Template cargado correctamente");
         console.log("Iniciando Puppeteer...");
 
+        const binPath = path.join("node_modules/@sparticuz/chromium-min/bin");
+        console.log("Chromium bin path exists?", fs.existsSync(binPath));
+
         const executablePath = await chromium.executablePath();
 
         const browser = await puppeteer.launch({
