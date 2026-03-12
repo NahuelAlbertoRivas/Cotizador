@@ -108,8 +108,11 @@ const frontendPath = path.join(__dirname, "../frontend/dist");
 
 app.use(express.static(frontendPath));
 
-app.use((req, res) => {
-    res.sendFile(path.join(frontendPath, "index.html"));
+// todas las rutas que no empiecen con /api van a index.html
+app.get("*", (req, res) => {
+    if (!req.path.startsWith("/api")) {
+        res.sendFile(path.join(frontendPath, "index.html"));
+    }
 });
 
 app.listen(PORT, () => {
