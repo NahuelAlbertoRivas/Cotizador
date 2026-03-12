@@ -3,10 +3,10 @@
 set -o errexit
 
 #Install dependencies
-npm install
+npm install-all
 
 #por si es necesario reconstruir
-#npm run build
+npm run build
 
 #asegurar que exista la dirección de cache para Puppeteer
 PUPPETEER_CACHE_DIR=/opt/render/.cache/puppeteer
