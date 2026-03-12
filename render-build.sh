@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 set -o errexit
+set -o nounset
+set -o pipefail
 
 cd backend
 
@@ -11,6 +13,7 @@ PUPPETEER_CACHE_DIR=/opt/render/.cache/puppeteer
 mkdir -p $PUPPETEER_CACHE_DIR
 
 #instalar pup y descargar chrome
+echo ">>> Instalando Puppeteer y descargando Chrome..."
 npx puppeteer browsers intall chrome
 
 #guadar/pull la cache con build cache
