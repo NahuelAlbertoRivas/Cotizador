@@ -28,8 +28,6 @@ export async function generatePDF(data) {
 
         console.log("Datos recibidos:", JSON.stringify(data, null, 2));
 
-        console.log("Chrome executable path:", puppeteer.executablePath());
-
         const rows = data.items.map(
             i => `<tr><td>${i.nombre}</td><td>${i.cantidad}</td><td>$${i.subtotal}</td></tr>`
         ).join("");
