@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import chromium from "@sparticuz/chromium";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -27,40 +28,35 @@ export async function generatePDF(data) {
 
         console.log("Datos recibidos:", JSON.stringify(data, null, 2));
 
-        console.log("Template cargado correctamente");
-
-        console.log("Iniciando Puppeteer...");
         console.log("Chrome executable path:", puppeteer.executablePath());
 
-        const browser = await puppeteer.launch({
-            headless: "new",
-            args: [
-                "--no-sandbox",
-                "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-gpu"
-            ]
-        });
+        const rows = data.items.map(
+            i => `<tr><td>${i.nombre}</td><td>${i.cantidad}</td><td>$${i.subtotal}</td></tr>`
+        ).join("");
 
-        console.log("Chromium iniciado");
+        html = html.replace("{{cliente}}", data.cliente)
+                   .replace("{{asesor}}", data.asesor)
+                   .replace("{{fechaEmision}}", data.fechaEmision)
+                   .replace("{{fechaCaducidad}}", data.fechaCaducidad)
+                   .replace("{{rows}}", rows)
+                   .replace("{{descuento}}", data.descuento)
+                   .replace("{{total}}", data.total);
+
+        console.log("Template cargado correctamente");
+        console.log("Iniciando Puppeteer...");
+
+        const browser = await puppeteer.launch({
+            args: chromium.args,
+            executablePath: await chromium.executablePath(),
+            headless: chromium.headless,
+        });
 
         const page = await browser.newPage();
-
-        await page.setContent(html, { waitUntil: "networkidle0" });
-
-        const pdf = await page.pdf({
-            format: "A4",
-            printBackground: true,
-        });
-
-        console.log("Contenido HTML cargado en la página.");
+        await page.setContent(html);
+        const pdf = await page.pdf({ format: "A4", printBackground: true });
 
         await browser.close();
-
         console.log("PDF generado correctamente");
-
-        console.log("Navegador cerrado, PDF generado correctamente.");
-
         return pdf;
 
     } catch (err) {
