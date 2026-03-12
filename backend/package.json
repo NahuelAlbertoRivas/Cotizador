@@ -2,10 +2,9 @@
     "name": "cotizador-backend",
     "type": "module",
     "dependencies": {
-        "@sparticuz/chromium": "^143.0.4",
         "cors": "^2.8.6",
         "express": "^5.2.1",
-        "puppeteer-core": "^24.39.0",
+        "puppeteer": "^24.39.0",
         "sqlite3": "^5.1.7"
     },
     "scripts": {

@@ -1,5 +1,4 @@
 import puppeteer from "puppeteer";
-import chromium from "@sparticuz/chromium";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -34,9 +33,13 @@ export async function generatePDF(data) {
         console.log("Chrome executable path:", puppeteer.executablePath());
 
         const browser = await puppeteer.launch({
-            args: chromium.args,
-            executablePath: await chromium.executablePath(),
-            headless: chromium.headless
+            headless: "new",
+            args: [
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu"
+            ]
         });
 
         console.log("Chromium iniciado");
