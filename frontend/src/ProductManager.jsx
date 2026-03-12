@@ -11,7 +11,7 @@ export default function ProductManager(props) {
     useEffect(() => load(), []);
 
     function load() {
-        api.get("/api/products").then((r) => {
+        api.get("/products").then((r) => {
             if (Array.isArray(r.data)) {
                 setProducts(r.data);
             } else {
