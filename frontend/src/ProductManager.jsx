@@ -11,10 +11,23 @@ export default function ProductManager(props) {
     useEffect(() => load(), []);
 
     function load() {
-        api.get("/products").then((r) => setProducts(r.data));
+        api.get("/api/products").then((r) => {
+            if (Array.isArray(r.data)) {
+                setProducts(r.data);
+            } else {
+                console.error("API devolvió algo inesperado:", r.data);
+                setProducts([]);
+            }
+        });
     }
 
-    const filtered = products.filter((p) => p.id.includes(search) || p.nombre.toLowerCase().includes(search.toLowerCase()));
+    const filtered = Array.isArray(products)
+        ? products.filter(
+            (p) =>
+                p.id.includes(search) ||
+                p.nombre.toLowerCase().includes(search.toLowerCase())
+            )
+        : [];
 
     async function importJSON(e) {
         const file = e.target.files[0];
