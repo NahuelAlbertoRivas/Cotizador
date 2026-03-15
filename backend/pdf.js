@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import { chromium } from "playwright";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -29,11 +29,9 @@ export async function generatePDF(data) {
 
         console.log("Template cargado correctamente");
 
-        console.log("Iniciando Puppeteer...");
-        console.log("Chrome executable path:", puppeteer.executablePath());
+        console.log("Iniciando Chromium con Playwright...");
 
-        const browser = await puppeteer.launch({
-            headless: "new",
+        const browser = await chromium.launch({
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox",
@@ -46,7 +44,7 @@ export async function generatePDF(data) {
 
         const page = await browser.newPage();
 
-        await page.setContent(html, { waitUntil: "networkidle0" });
+        await page.setContent(html, { waitUntil: "networkidle" });
 
         const pdf = await page.pdf({
             format: "A4",
