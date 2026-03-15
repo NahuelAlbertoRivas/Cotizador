@@ -13,8 +13,8 @@ npm install
 #mkdir -p $PUPPETEER_CACHE_DIR
 
 #instalar pup y descargar chrome
-#echo ">>> Instalando Puppeteer y descargando Chrome..."
-#npx puppeteer browsers intall chrome
+#echo ">>> Instalando Chromium de Playwright..."
+npx playwright install --with-deps chromium
 
 #guadar/pull la cache con build cache
 #if [[ ! -d $PUPPETEER_CACHE_DIR ]]; then

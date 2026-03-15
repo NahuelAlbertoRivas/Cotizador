@@ -32,6 +32,7 @@ export async function generatePDF(data) {
         console.log("Iniciando Chromium con Playwright...");
 
         const browser = await chromium.launch({
+            headless: true,
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox",
