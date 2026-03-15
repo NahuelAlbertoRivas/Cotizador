@@ -14,7 +14,7 @@ npm install
 
 #instalar pup y descargar chrome
 #echo ">>> Instalando Chromium de Playwright..."
-npx playwright install chromium
+PLAYWRIGHT_BROWSERS_PATH=0 npx playwright install chromium
 
 #guadar/pull la cache con build cache
 #if [[ ! -d $PUPPETEER_CACHE_DIR ]]; then
