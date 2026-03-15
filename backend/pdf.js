@@ -25,6 +25,27 @@ export async function generatePDF(data) {
             `src="data:image/png;base64,${logoData}"`
         );
 
+        let rows = "";
+
+        if (data.items && data.items.length) {
+        rows = data.items.map(item => `
+            <tr>
+            <td>${item.nombre}</td>
+            <td>${item.cantidad}</td>
+            <td>$${item.subtotal}</td>
+            </tr>
+        `).join("");
+        }
+
+        html = html
+        .replace("{{cliente}}", data.cliente || "")
+        .replace("{{asesor}}", data.asesor || "")
+        .replace("{{fechaEmision}}", data.fechaEmision || "")
+        .replace("{{fechaCaducidad}}", data.fechaCaducidad || "")
+        .replace("{{descuento}}", data.descuento ?? 0)
+        .replace("{{total}}", data.total ?? 0)
+        .replace("{{rows}}", rows);
+
         console.log("Datos recibidos:", JSON.stringify(data, null, 2));
 
         console.log("Template cargado correctamente");
